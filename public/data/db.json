@@ -35,7 +35,7 @@
 		"category": "Women",
 		"size": "UK 9",
 		"colour": "Black",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "Nike",
 		"product_image": "fp"
 	},
@@ -55,7 +55,7 @@
 		"category": "Men",
 		"size": "UK 5",
 		"colour": "Gry/Wht",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "jd",
 		"product_image": ""
 	},
@@ -75,7 +75,7 @@
 		"category": "Men",
 		"size": "UK 9",
 		"colour": "Gry/Wht",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "fp",
 		"product_image": ""
 	},
@@ -125,7 +125,7 @@
 		"category": "Men",
 		"size": "UK 10",
 		"colour": "black",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "gm",
 		"product_image": ""
 	},
@@ -155,7 +155,7 @@
 		"category": "Women",
 		"size": "UK 4",
 		"colour": "blue",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "gm",
 		"product_image": ""
 	},
@@ -185,7 +185,7 @@
 		"category": "Women",
 		"size": "UK 6",
 		"colour": "white",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "fp",
 		"product_image": ""
 	},
@@ -195,7 +195,7 @@
 		"category": "Men",
 		"size": "UK 7",
 		"colour": "Gry/Wht",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "jh",
 		"product_image": ""
 	},
@@ -215,7 +215,7 @@
 		"category": "Women",
 		"size": "UK 8",
 		"colour": "Gry/Wht",
-		"status": "oneTheWay",
+		"status": "onTheWay",
 		"customer_initial": "fp",
 		"product_image": ""
 	},
