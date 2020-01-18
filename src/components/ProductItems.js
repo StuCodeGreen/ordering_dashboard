@@ -1,9 +1,58 @@
 import React from 'react';
 
-export default function ProductItem() {
-	return (
-		<div>
-			
-		</div>
-	)
+export default class ProductItems extends React.Component {
+
+	state = {
+		id:'',
+		name:'',
+		category:'',
+		size:'',
+		colour:'',
+		status:'',
+		initial:'',
+		image:''
+	}
+
+	async componentDidMount() { 
+		const {
+			key,
+			id,
+			name,
+			category,
+			size,
+			colour,
+			status,
+			initial,
+			image
+		} = this.props;
+
+		this.setState({
+			id,
+			name,
+			category,
+			size,
+			colour,
+			status,
+			initial,
+			image
+		});
+
+	}
+
+
+
+
+
+
+  render() {
+
+
+    return (
+      <div>
+				<h1>		{this.state.id}</h1>
+			<h2>	{this.state.name}	</h2>
+							
+      </div>
+    );
+  }
 }
