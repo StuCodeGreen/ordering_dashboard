@@ -37,17 +37,13 @@
 		"colour": "",
 		"status": "",
 		"customer_initial": "",
-		"product_im
-"status":"",
+		"product_image": ""
 	},
 	{
 		"id": "5",
-		"product_na
-"status":"",
-		"category":
-"status":"",
+		"product_name": "",
+		"category": "",
 		"size": "",
-"status":"",
 		"colour": "",
 		"status": "",
 		"customer_initial": "",
@@ -166,7 +162,6 @@
 	{
 		"id": "17",
 		"product_name": "",
-		"status":"",
 		"category": "",
 		"size": "",
 		"colour": "",
