@@ -1,8 +1,30 @@
+.pagination {
+	grid-area: pagination;
+	background-color: pink;
+	/* align-self: center; */
+	/* justify-self: center; */
+}
+
 .pages {
 	display: inline-block;
 	width: 10px;
 	height: 10px;
-	background-color: #FEFEFE;
+	background-color: red;
 	border-radius: 10px;
 	margin: 0 10px;
 }
+.paginationItems{
+	display: flex;
+	justify-content: center;
+}
+
+.numbers{
+position: absolute;
+	right: 0px;
+}
+
+.paginationDots{
+	position: relative;
+}
+
+

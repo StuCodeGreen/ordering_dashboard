@@ -1,0 +1,10 @@
+.productItem {
+	display: flex;
+	justify-content: space-between;
+	background-color: pink;
+	margin:10px 10px;
+	margin: auto;
+
+
+	
+}

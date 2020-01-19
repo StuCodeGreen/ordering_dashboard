@@ -1,0 +1,5 @@
+.filter {
+	grid-area: filter;
+	background-color: pink;
+	align-self: center;
+}

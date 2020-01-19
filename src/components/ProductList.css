@@ -1,0 +1,19 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    ". . . filter"
+    "main main main main"
+		"pagination pagination pagination pagination";
+		/* justify-items: center; */
+		/* align-items: center; */
+		grid-gap: 10px;
+		/* align-items: start; */
+
+}
+
+.products{
+	grid-area: main;
+
+}

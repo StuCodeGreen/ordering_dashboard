@@ -1,4 +1,5 @@
 import React from 'react';
+import './ProductFilter.css';
 
 export default class ProductFilter extends React.Component {
 
@@ -7,7 +8,7 @@ export default class ProductFilter extends React.Component {
 		const {status} = this.props;
 
 		return (
-			<div>
+			<div className="filter">
 			<button id="all" onClick={status}>All</button>
 			<button id="ready" onClick={status}>Ready to try</button>
 			<button id="onTheWay" onClick={status}>On the way</button>

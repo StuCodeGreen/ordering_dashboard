@@ -3,6 +3,7 @@ import axios from 'axios';
 import ProductItems from './ProductItems';
 import ProductFilter from './ProductFilter';
 import ProductPagination from './ProductPagination';
+import './ProductList.css';
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -108,9 +109,10 @@ class ProductList extends React.Component {
     return (
       <React.Fragment>
         {this.state.paginated ? (
-          <div>
+          <div className="dashboard">
+				
             <ProductFilter status={this.status} />
-            {this.state.paginated.map(product => (
+						<div className="products">   {this.state.paginated.map(product => (
               <ProductItems
                 key={product.id}
                 id={product.id}
@@ -120,9 +122,9 @@ class ProductList extends React.Component {
                 colour={product.colour}
                 status={product.status}
                 initial={product.customer_initial}
-                img={product.product_image}
+								img={product.product_image}
               />
-            ))}
+            ))}</div>
             <ProductPagination
 							currentPage={this.state.currentPage}
               totalPages={this.state.totalPages}
