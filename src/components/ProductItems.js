@@ -39,16 +39,12 @@ export default class ProductItems extends React.Component {
 	}
 
 
-
-
-
-
   render() {
 
 
     return (
-      <div>
-				<h1>		{this.state.id}</h1>
+      <div> 
+			<h1>{this.state.id}</h1>
 			<h2>	{this.state.name}	</h2>
 			<h2>	{this.state.size}	</h2>
 			<h2>	{this.state.colour}	</h2>
