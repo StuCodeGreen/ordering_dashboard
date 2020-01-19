@@ -22,7 +22,7 @@ export default class ProductItems extends React.Component {
 			colour,
 			status,
 			initial,
-			image
+			img
 		} = this.props;
 
 		this.setState({
@@ -33,7 +33,7 @@ export default class ProductItems extends React.Component {
 			colour,
 			status,
 			initial,
-			image
+			img
 		});
 
 	}
@@ -52,6 +52,8 @@ export default class ProductItems extends React.Component {
 			<h2>	{this.state.name}	</h2>
 			<h2>	{this.state.size}	</h2>
 			<h2>	{this.state.colour}	</h2>
+			
+			<img src={`./images/${this.state.img}`} alt="logo" />
 							
       </div>
     );

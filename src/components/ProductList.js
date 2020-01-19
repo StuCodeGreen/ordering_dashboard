@@ -124,6 +124,7 @@ class ProductList extends React.Component {
               />
             ))}
             <ProductPagination
+							currentPage={this.state.currentPage}
               totalPages={this.state.totalPages}
               selectedPage={this.selectedPage}
             />
