@@ -21,19 +21,25 @@ class ProductList extends React.Component {
     this.tick = this.tick.bind(this);
     this.status = this.status.bind(this);
     this.totalPageCount = this.totalPageCount.bind(this);
+    this.selectedPage = this.selectedPage.bind(this);
   }
 
   async componentDidMount() {
     const res = await axios.get(this.state.url);
     this.setState({ products: res.data, data: res.data });
     this.totalPageCount(this.state.products);
-    this.pagination(this.state.products);
-    this.tick();
+    this.pagination(this.state.products,this.state.currentPage);
+    // this.tick();
   }
 
   componentWillUnmount() {
     clearInterval(this.tick);
   }
+
+	selectedPage(event){
+		this.pagination(this.state.products,event.target.id)
+		console.log(this.state.products)
+	}
 
   totalPageCount(products) {
     const { productsPerPage } = this.state;
@@ -41,8 +47,8 @@ class ProductList extends React.Component {
     this.setState({ totalPages: pageCount });
   }
 
-  pagination(products) {
-    const { currentPage, productsPerPage } = this.state;
+  pagination(products,currentPage) {
+    const { productsPerPage } = this.state;
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = products.slice(
@@ -51,6 +57,8 @@ class ProductList extends React.Component {
     );
     this.setState({ paginated: currentProducts });
   }
+
+
 
   tick() {
     setInterval(() => {
@@ -63,6 +71,16 @@ class ProductList extends React.Component {
       this.pagination(this.state.products);
     }, 10000);
   }
+	
+  filter(status) {
+    let filtered = this.state.data.filter(product =>
+      product.status.includes(status)
+    );
+    this.totalPageCount(filtered);
+		this.pagination(filtered,1);
+		this.setState({ products: filtered });
+    
+	}
 
 	status(event) {
     if (event.target.id === 'ready') {
@@ -78,16 +96,8 @@ class ProductList extends React.Component {
       this.filter(event.target.id);
     }
 	}
+
 	
-  filter(status) {
-    let filtered = this.state.data.filter(product =>
-      product.status.includes(status)
-    );
-    this.setState({ products: filtered });
-    this.totalPageCount(filtered);
-    this.pagination(filtered);
-    this.setState({ currentPage: 1 });
-	}
 	
 
 
@@ -115,7 +125,10 @@ class ProductList extends React.Component {
               />
 						
 						))}
-						<ProductPagination pages={this.state.totalPages}/>
+						<ProductPagination 
+						totalPages={this.state.totalPages}
+						selectedPage={this.selectedPage}
+						/>
           </div>
 					
         ) : (

@@ -1,17 +1,41 @@
 import React from 'react';
+import './ProductPagination.css';
 
 export default class ProductPagination extends React.Component {
 
 	render(){
-		let {pages} = this.props;
-		// const pageNumbers = [];
-		// for(let i = 1; i <= pages; i++) {
-		// 	pageNumbers.push(i);
-		// }
-		// console.log(pageNumbers);
+		let {totalPages, selectedPage} = this.props;
+		const pages = [];
+		for(let i = 1; i <= totalPages; i++) {
+			pages.push(i);
+		}
+
+		const renderPagesIndication = pages.map(page => (
+			<span 
+			 onClick={selectedPage}
+			 key={page}
+			 id={page} 
+			 className="pages"
+			 
+			 >
+
+			 </span>
+		));
+
 		return (
 			<div>
-				<h1>{pages}</h1>
+				{/* {renderPagesIndication} */}
+				{pages.map(page => (
+			<span 
+			 onClick={selectedPage}
+			 key={page}
+			 id={page} 
+			 className="pages"
+			 
+			 >
+
+			 </span>
+		))}
 			</div>
 		
 		)
