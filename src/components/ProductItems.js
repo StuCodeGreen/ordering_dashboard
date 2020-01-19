@@ -51,8 +51,8 @@ export default class ProductItems extends React.Component {
 				<h2 className="productName">{this.state.name}</h2>
 			</div>
 			<div className="columns">
-				<h1>Category:</h1>
-				<h1>{this.state.category}</h1>
+				<h2>Category:</h2>
+				<h2>{this.state.category}</h2>
 			</div>
 			<div className="columns">
 				<h2>Size:</h2>

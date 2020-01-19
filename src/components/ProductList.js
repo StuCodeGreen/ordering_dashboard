@@ -78,11 +78,9 @@ class ProductList extends React.Component {
 	}
 
   selectedPage(event) {
-		this.pageIndication(event.target.id)
-	
+		this.pageIndication(event.target.id)	
     this.setState({ currentPage: Number(event.target.id) });
     this.pagination(this.state.products, Number(event.target.id));
-    console.log(this.state.products);
   }
 
   filter(status) {

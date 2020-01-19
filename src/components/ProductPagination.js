@@ -26,7 +26,7 @@ export default class ProductPagination extends React.Component {
 			<div  className="pagination">
 				<div className="paginationItems">
 				<div className="paginationDots">{renderPagesIndication}</div>
-				<div className="numbers">{currentPage}/{totalPages}</div>
+				<div className="numbers"><span>{currentPage}</span><span className="numbersSeparator"></span><span>{totalPages}</span></div>
 			</div>
 		
 		

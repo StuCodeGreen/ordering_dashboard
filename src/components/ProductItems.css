@@ -43,10 +43,17 @@ img {
 	display: flex;
 	align-items:center;
 	color:#fff;
+
 }
 
 .columns {
 	color:#A0A0A8;
+
+}
+
+.columns h2 {
+	margin:0px;
+	font-weight:500;
 }
 
 .lastColumn {

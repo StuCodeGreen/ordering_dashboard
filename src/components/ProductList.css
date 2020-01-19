@@ -6,10 +6,7 @@
     ". . . filter"
     "main main main main"
 		"pagination pagination pagination pagination";
-		/* justify-items: center; */
-		/* align-items: center; */
-		grid-gap: 10px;
-		/* align-items: start; */
+	grid-gap: 10px;
 	margin: 10px 50px;
 }
 
