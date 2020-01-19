@@ -28,18 +28,19 @@ class ProductList extends React.Component {
     const res = await axios.get(this.state.url);
     this.setState({ products: res.data, data: res.data });
     this.totalPageCount(this.state.products);
-    this.pagination(this.state.products,this.state.currentPage);
-    // this.tick();
+    this.pagination(this.state.products, this.state.currentPage);
+		this.tick(this.state.currentPage);
   }
 
   componentWillUnmount() {
     clearInterval(this.tick);
   }
 
-	selectedPage(event){
-		this.pagination(this.state.products,event.target.id)
-		console.log(this.state.products)
-	}
+  selectedPage(event) {
+		this.setState({currentPage: event.target.id});
+    this.pagination(this.state.products, event.target.id);
+    console.log(this.state.products);
+  }
 
   totalPageCount(products) {
     const { productsPerPage } = this.state;
@@ -47,7 +48,7 @@ class ProductList extends React.Component {
     this.setState({ totalPages: pageCount });
   }
 
-  pagination(products,currentPage) {
+  pagination(products, currentPage) {
     const { productsPerPage } = this.state;
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -58,31 +59,38 @@ class ProductList extends React.Component {
     this.setState({ paginated: currentProducts });
   }
 
-
-
-  tick() {
+  tick(counter) {
+		// let counter = this.state.currentPage;
     setInterval(() => {
-      this.setState(prevState => ({
-        currentPage: prevState.currentPage + 1
-      }));
-      if (this.state.currentPage > this.state.totalPages) {
-        this.setState({ currentPage: 1 });
-      }
-      this.pagination(this.state.products);
-    }, 10000);
+		
+      if (this.state.currentPage >= this.state.totalPages) {
+        counter = 1;
+			}
+			this.setState({currentPage: counter});
+			this.pagination(this.state.products, this.state.currentPage);
+			counter++;
+    }, 1000);
   }
-	
-  filter(status) {
-    let filtered = this.state.data.filter(product =>
-      product.status.includes(status)
-    );
-    this.totalPageCount(filtered);
-		this.pagination(filtered,1);
-		this.setState({ products: filtered });
-    
-	}
 
-	status(event) {
+  filter(status) {
+    if (status === 'all') {
+      this.pagination(this.state.data, 1);
+      this.totalPageCount(this.state.data);
+      this.setState({ products: this.state.data });
+    } else {
+      let filtered = this.state.data.filter(product =>
+        product.status.includes(status)
+      );
+      this.totalPageCount(filtered);
+      this.pagination(filtered, 1);
+      this.setState({ products: filtered });
+    }
+  }
+
+  status(event) {
+    if (event.target.id === 'all') {
+      this.filter(event.target.id);
+    }
     if (event.target.id === 'ready') {
       this.filter(event.target.id);
     }
@@ -95,22 +103,14 @@ class ProductList extends React.Component {
     if (event.target.id === 'outOfStock') {
       this.filter(event.target.id);
     }
-	}
-
-	
-	
-
-
+  }
 
   render() {
     return (
-			
       <React.Fragment>
-      
         {this.state.paginated ? (
-				
           <div>
-						<ProductFilter status={this.status} />
+            <ProductFilter status={this.status} />
             {this.state.paginated.map(product => (
               <ProductItems
                 key={product.id}
@@ -123,19 +123,15 @@ class ProductList extends React.Component {
                 initial={product.customer_initial}
                 img={product.product_image}
               />
-						
-						))}
-						<ProductPagination 
-						totalPages={this.state.totalPages}
-						selectedPage={this.selectedPage}
-						/>
+            ))}
+            <ProductPagination
+              totalPages={this.state.totalPages}
+              selectedPage={this.selectedPage}
+            />
           </div>
-					
         ) : (
           <h4>Loading...</h4>
         )}
-
-
       </React.Fragment>
     );
   }
