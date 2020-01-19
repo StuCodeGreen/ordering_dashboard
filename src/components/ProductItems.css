@@ -1,10 +1,51 @@
 .productItem {
 	display: flex;
+	min-height: 50px;
+	position: relative;
 	justify-content: space-between;
-	background-color: pink;
-	margin:10px 10px;
-	margin: auto;
+	align-items: center;
+	background-color: #222222;
+	margin:20px 0px;
+	padding: 10px 50px;
+	border: 1.5px solid #767678;
+	border-radius: 10px;
+}
 
+.status {
+	position: absolute;
+	left:0px;
+	top: 0px;
+	width: 20px;
+	height: 100%;
+	border-top-left-radius: 7.5px;
+	border-bottom-left-radius: 7.5px;
+}
 
-	
+.status.ready {
+	background-color: #49D5AE;
+}
+
+.status.queue{
+	background-color: #FC662F;
+}
+.status.onTheWay{
+	background-color: #66A8E4;
+}
+.status.outOfStock{
+	background-color: #F41801;
+}
+
+img {
+	border-radius: 10px;
+}
+
+.firstColumn {
+	display: flex;
+	align-items:center;
+	color:#fff;
+}
+
+.productName {
+	margin-left: 30px;
+  width: 150px;
 }

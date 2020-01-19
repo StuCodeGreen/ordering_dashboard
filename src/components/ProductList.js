@@ -30,7 +30,7 @@ class ProductList extends React.Component {
     this.setState({ products: res.data, data: res.data });
     this.totalPageCount(this.state.products);
     this.pagination(this.state.products, this.state.currentPage);
-    this.tick();
+    // this.tick();
   }
 
   componentWillUnmount() {
