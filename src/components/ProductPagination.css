@@ -1,0 +1,8 @@
+.pages {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	background-color: red;
+	border-radius: 10px;
+	margin: 0 10px;
+}
