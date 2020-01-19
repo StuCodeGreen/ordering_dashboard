@@ -9,13 +9,21 @@ export default class ProductFilter extends React.Component {
 
 		return (
 			<div className="filter">
-			<button id="all" onClick={status}>All</button>
-			<button id="ready" onClick={status}>Ready to try</button>
-			<button id="onTheWay" onClick={status}>On the way</button>
-			<button id="queue" onClick={status}>in the queue</button>
-			<button id="outOfStock" onClick={status}>out of stock</button>
+			<input type="button" id="all" onClick={status}/>
+			<label htmlFor="all">all</label>
 
-	
+			<input type="button" id="ready" onClick={status}/>
+			<label htmlFor="ready">ready to try</label>
+
+			<input type="button" id="onTheWay" onClick={status}/>
+			<label htmlFor="onTheWay">on the way</label>
+
+			<input type="button" id="queue" onClick={status}/>
+			<label htmlFor="queue">in the queue</label>
+
+			<input type="button" id="outOfStock" onClick={status}/>
+			<label htmlFor="outOfStock">out of stock</label>
+
 			</div>
 			)
 	}

@@ -1,6 +1,6 @@
 .productItem {
 	display: flex;
-	min-height: 50px;
+	height: 125px;
 	position: relative;
 	justify-content: space-between;
 	align-items: center;
@@ -70,5 +70,6 @@ img {
 }
 .productName {
 	margin-left: 30px;
-  width: 150px;
+	width: 150px;
+	line-height: 22px;
 }

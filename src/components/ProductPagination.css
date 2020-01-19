@@ -26,14 +26,14 @@ position: absolute;
 top:0px;
 right: 10px;
 color:#fff;
-font-size: 25px;
+font-size: 22px;
 }
 
 .numbers span {
-	margin:0px 8px;
+	margin:0px 5px;
 }
 .numbers span:first-child {
-	font-size:30px;
+	font-size:25px;
 	font-weight: 500;
 }
 .numbers span:last-child {
@@ -44,7 +44,7 @@ font-size: 25px;
 	position: absolute;
 	top:-2px;
 	background-color: #fff;
-	right: 21px;
+	right: 30px;
 	width: 1px;
 	height: 120%;
 }

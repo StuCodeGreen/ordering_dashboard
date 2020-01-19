@@ -1,5 +1,38 @@
 .filter {
+	display: flex;
 	grid-area: filter;
-	background-color: pink;
-	align-self: center;
+	justify-self: end;
+	align-items: center;
+}
+.filter label {
+	color:#fff;
+	font-size:11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing:2px;
+	margin-right:35px;
+	margin-left:10px;
+	font-weight: 500;
+}
+.filter input {
+	width: 23px;
+	height: 23px;
+	border-radius:50%;
+	border:1.3px solid #fff;
+}
+
+input#all{
+	background-color:#cfcfcfcf ;
+}
+input#ready{
+	background-color:#49D5AE ;
+}
+input#onTheWay{
+	background-color:#66A8E4 ;
+}
+input#queue{
+	background-color:#FC662F ;
+}
+input#outOfStock{
+	background-color:#F41801 ;
 }

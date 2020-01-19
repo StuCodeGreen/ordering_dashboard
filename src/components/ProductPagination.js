@@ -16,20 +16,20 @@ export default class ProductPagination extends React.Component {
 			 key={page}
 			 id={page} 
 			 className="pages"
-			 
 			 >
-
 			 </span>
 		));
 
 		return (
 			<div  className="pagination">
 				<div className="paginationItems">
-				<div className="paginationDots">{renderPagesIndication}</div>
-				<div className="numbers"><span>{currentPage}</span><span className="numbersSeparator"></span><span>{totalPages}</span></div>
-			</div>
-		
-		
+					<div className="paginationDots">{renderPagesIndication}</div>
+					<div className="numbers">
+						<span>{currentPage < 10 ? `0${currentPage}` : currentPage}</span>
+						<span className="numbersSeparator"></span>
+						<span>{totalPages < 10 ? `0${totalPages}` : totalPages}</span>
+					</div>
+				</div>
 			</div>
 			
 		

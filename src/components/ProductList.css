@@ -7,10 +7,11 @@
     "main main main main"
 		"pagination pagination pagination pagination";
 	grid-gap: 10px;
-	margin: 10px 50px;
+	margin: 40px 50px;
 }
 
 .products{
+	margin:20px 0px;
 	grid-area: main;
 
 }
