@@ -30,7 +30,7 @@ font-size: 22px;
 }
 
 .numbers span {
-	margin:0px 5px;
+	margin:0px 9px;
 }
 .numbers span:first-child {
 	font-size:25px;
@@ -44,7 +44,7 @@ font-size: 22px;
 	position: absolute;
 	top:-2px;
 	background-color: #fff;
-	right: 30px;
+	right: 33px;
 	width: 1px;
 	height: 120%;
 }

@@ -15,10 +15,12 @@
 	font-weight: 500;
 }
 .filter input {
+	min-width: 23px;
 	width: 23px;
 	height: 23px;
 	border-radius:50%;
-	border:1.3px solid #fff;
+	border:1.4px solid #fff;
+	-webkit-appearance: none;
 }
 
 input#all{
