@@ -29,17 +29,11 @@ class ProductList extends React.Component {
     this.setState({ products: res.data, data: res.data });
     this.totalPageCount(this.state.products);
     this.pagination(this.state.products, this.state.currentPage);
-		this.tick(this.state.currentPage);
+    this.tick();
   }
 
   componentWillUnmount() {
     clearInterval(this.tick);
-  }
-
-  selectedPage(event) {
-		this.setState({currentPage: event.target.id});
-    this.pagination(this.state.products, event.target.id);
-    console.log(this.state.products);
   }
 
   totalPageCount(products) {
@@ -59,17 +53,22 @@ class ProductList extends React.Component {
     this.setState({ paginated: currentProducts });
   }
 
-  tick(counter) {
-		// let counter = this.state.currentPage;
+  tick() {
     setInterval(() => {
-		
+      let counter = this.state.currentPage;
+      counter++;
       if (this.state.currentPage >= this.state.totalPages) {
         counter = 1;
-			}
-			this.setState({currentPage: counter});
-			this.pagination(this.state.products, this.state.currentPage);
-			counter++;
-    }, 1000);
+      }
+      this.setState({ currentPage: counter });
+      this.pagination(this.state.products, this.state.currentPage);
+    }, 10000);
+  }
+
+  selectedPage(event) {
+    this.setState({ currentPage: Number(event.target.id) });
+    this.pagination(this.state.products, Number(event.target.id));
+    console.log(this.state.products);
   }
 
   filter(status) {
