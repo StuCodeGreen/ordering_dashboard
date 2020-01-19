@@ -45,6 +45,22 @@ img {
 	color:#fff;
 }
 
+.columns {
+	color:#A0A0A8;
+}
+
+.lastColumn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:#fff;
+	border: 1.4px solid #767678;
+	border-radius:10px;
+	/* padding:5px 10px; */
+	width:60px;
+	height: 60px;
+	text-transform: uppercase;
+}
 .productName {
 	margin-left: 30px;
   width: 150px;

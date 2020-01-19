@@ -50,19 +50,19 @@ export default class ProductItems extends React.Component {
 				<img src={`./images/${this.state.img}`} alt="logo" width="100" height="100" />
 				<h2 className="productName">{this.state.name}</h2>
 			</div>
-			<div>
+			<div className="columns">
 				<h1>Category:</h1>
 				<h1>{this.state.category}</h1>
 			</div>
-			<div>
+			<div className="columns">
 				<h2>Size:</h2>
 				<h2>{this.state.size}	</h2>
 			</div>
-			<div>
+			<div className="columns">
 				<h2>Colour:</h2>
 			<h2>{this.state.colour}	</h2>
 			</div>
-			<div>
+			<div className="lastColumn">
 				<h2>	{this.state.initial}	</h2>
 			</div>
 		

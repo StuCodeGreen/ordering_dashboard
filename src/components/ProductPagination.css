@@ -1,6 +1,6 @@
 .pagination {
 	grid-area: pagination;
-	background-color: pink;
+	/* background-color: pink; */
 	/* align-self: center; */
 	/* justify-self: center; */
 }
@@ -9,7 +9,7 @@
 	display: inline-block;
 	width: 10px;
 	height: 10px;
-	background-color: red;
+	background-color: white;
 	border-radius: 10px;
 	margin: 0 10px;
 }
@@ -17,7 +17,9 @@
 	display: flex;
 	justify-content: center;
 }
-
+.pages.active {
+	background-color: #3CDCAF;
+}
 .numbers{
 position: absolute;
 	right: 0px;
