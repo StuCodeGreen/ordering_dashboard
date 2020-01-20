@@ -1,17 +1,17 @@
 .dashboard {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;
-  grid-template-areas: 
-    ". . . filter"
-    "main main main main"
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: auto;
+	grid-template-areas:
+		". . . filter"
+		"main main main main"
 		"pagination pagination pagination pagination";
 	grid-gap: 10px;
 	margin: 40px 50px;
 }
 
-.products{
-	margin:20px 0px;
+.products {
+	margin: 20px 0px;
 	grid-area: main;
 
 }

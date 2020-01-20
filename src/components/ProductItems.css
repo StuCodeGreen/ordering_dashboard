@@ -1,74 +1,76 @@
 .productItem {
-  display: flex;
-  height: 125px;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #222222;
-  margin: 20px 0px;
-  padding: 10px 50px;
-  border: 1.5px solid #767678;
-  border-radius: 10px;
+	display: flex;
+	height: 125px;
+	position: relative;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #222222;
+	margin: 20px 0px;
+	padding: 10px 50px;
+	border: 1.5px solid #767678;
+	border-radius: 10px;
 }
 
 .status {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 20px;
-  height: 100%;
-  border-top-left-radius: 7.5px;
-  border-bottom-left-radius: 7.5px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 20px;
+	height: 100%;
+	border-top-left-radius: 7.5px;
+	border-bottom-left-radius: 7.5px;
 }
 
 .status.ready {
-  background-color: #49d5ae;
+	background-color: #49d5ae;
 }
 
 .status.queue {
-  background-color: #fc662f;
+	background-color: #fc662f;
 }
+
 .status.onTheWay {
-  background-color: #66a8e4;
+	background-color: #66a8e4;
 }
+
 .status.outOfStock {
-  background-color: #f41801;
+	background-color: #f41801;
 }
 
 img {
-  border-radius: 10px;
+	border-radius: 10px;
 }
 
 .firstColumn {
-  display: flex;
-  align-items: center;
-  color: #fff;
+	display: flex;
+	align-items: center;
+	color: #fff;
 }
 
 .columns {
-  color: #a0a0a8;
-  margin: 0px 10px;
+	color: #a0a0a8;
+	margin: 0px 10px;
 }
 
 .columns h2 {
-  margin: 0px;
-  font-weight: 500;
+	margin: 0px;
+	font-weight: 500;
 }
 
 .lastColumn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  border: 1.4px solid #767678;
-  border-radius: 10px;
-  /* padding:5px 10px; */
-  width: 60px;
-  height: 60px;
-  text-transform: uppercase;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	border: 1.4px solid #767678;
+	border-radius: 10px;
+	width: 60px;
+	height: 60px;
+	text-transform: uppercase;
 }
+
 .productName {
-  margin-left: 30px;
-  width: 150px;
-  line-height: 25px;
+	margin-left: 30px;
+	width: 150px;
+	line-height: 25px;
 }

@@ -1,40 +1,46 @@
 .filter {
-	display: flex;
-	grid-area: filter;
-	justify-self: end;
-	align-items: center;
-}
-.filter label {
-	color:#fff;
-	font-size:11px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing:2px;
-	margin-right:35px;
-	margin-left:10px;
-	font-weight: 500;
-}
-.filter input {
-	min-width: 23px;
-	width: 23px;
-	height: 23px;
-	border-radius:50%;
-	border:1.4px solid #fff;
-	-webkit-appearance: none;
+  display: flex;
+  grid-area: filter;
+  justify-self: end;
+  align-items: center;
 }
 
-input#all{
-	background-color:#cfcfcfcf ;
+.filter label {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 35px;
+  margin-left: 10px;
+  font-weight: 500;
 }
-input#ready{
-	background-color:#49D5AE ;
+
+.filter input {
+  min-width: 23px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1.4px solid #fff;
+  -webkit-appearance: none;
 }
-input#onTheWay{
-	background-color:#66A8E4 ;
+
+input#all {
+  background-color: #cfcfcfcf;
 }
-input#queue{
-	background-color:#FC662F ;
+
+input#ready {
+  background-color: #49d5ae;
 }
-input#outOfStock{
-	background-color:#F41801 ;
+
+input#onTheWay {
+  background-color: #66a8e4;
+}
+
+input#queue {
+  background-color: #fc662f;
+}
+
+input#outOfStock {
+  background-color: #f41801;
 }

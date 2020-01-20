@@ -56,29 +56,28 @@ class ProductList extends React.Component {
 
   tick() {
     setInterval(() => {
-			
       let counter = this.state.currentPage;
       counter++;
       if (this.state.currentPage >= this.state.totalPages) {
         counter = 1;
-			}
-			this.pageIndication(counter);
+      }
+      this.pageIndication(counter);
       this.setState({ currentPage: counter });
       this.pagination(this.state.products, this.state.currentPage);
     }, 10000);
   }
 
-	pageIndication(event){
-		let span = document.querySelectorAll(".pages");
-		let element = document.getElementById(event);
-		for (var i = 0; i < span.length; i++) {
-			span[i].classList.remove('active');
-	 	}
-		element.classList.add("active");
-	}
+  pageIndication(event) {
+    let span = document.querySelectorAll('.pages');
+    let element = document.getElementById(event);
+    for (var i = 0; i < span.length; i++) {
+      span[i].classList.remove('active');
+    }
+    element.classList.add('active');
+  }
 
   selectedPage(event) {
-		this.pageIndication(event.target.id)	
+    this.pageIndication(event.target.id);
     this.setState({ currentPage: Number(event.target.id) });
     this.pagination(this.state.products, Number(event.target.id));
   }
@@ -121,23 +120,25 @@ class ProductList extends React.Component {
       <React.Fragment>
         {this.state.paginated ? (
           <div className="dashboard">
-				
             <ProductFilter status={this.status} />
-						<div className="products">   {this.state.paginated.map(product => (
-              <ProductItems
-                key={product.id}
-                id={product.id}
-                name={product.product_name}
-                category={product.category}
-                size={product.size}
-                colour={product.colour}
-                status={product.status}
-                initial={product.customer_initial}
-								img={product.product_image}
-              />
-            ))}</div>
+            <div className="products">
+              {' '}
+              {this.state.paginated.map(product => (
+                <ProductItems
+                  key={product.id}
+                  id={product.id}
+                  name={product.product_name}
+                  category={product.category}
+                  size={product.size}
+                  colour={product.colour}
+                  status={product.status}
+                  initial={product.customer_initial}
+                  img={product.product_image}
+                />
+              ))}
+            </div>
             <ProductPagination
-							currentPage={this.state.currentPage}
+              currentPage={this.state.currentPage}
               totalPages={this.state.totalPages}
               selectedPage={this.selectedPage}
             />
