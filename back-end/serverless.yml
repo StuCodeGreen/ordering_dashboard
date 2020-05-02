@@ -23,7 +23,7 @@ resources:
   Resources:
     ProductsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
-      DeletionPolocy: Retain
+      DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
           - AttributeName: 'id'
