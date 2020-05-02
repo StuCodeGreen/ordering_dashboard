@@ -13,7 +13,7 @@
 
 service: backend
 # app and org for use with dashboard.serverless.com
-app: dashboard-ordering
+app: ordering-dashboard
 org: stucodegreen
 
 # You can pin your service to only deploy with a specific Serverless version
