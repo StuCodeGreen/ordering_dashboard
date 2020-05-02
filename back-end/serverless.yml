@@ -1,4 +1,4 @@
-service: backend-endsls
+service: backend-end
 app: ordering-dashboard
 org: stucodegreen
 
