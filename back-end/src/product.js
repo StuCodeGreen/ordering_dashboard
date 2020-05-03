@@ -87,3 +87,7 @@ const productInfo = ({
 		...product,
 	};
 };
+
+module.exports.list = () => {
+
+};

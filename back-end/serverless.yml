@@ -47,3 +47,11 @@ functions:
       - http:
           path: products
           method: post
+  listProducts:
+    handler: src/product.list
+    memorySize: 128
+    description: List all products.
+    events:
+      - http:
+          path: products
+          method: get
