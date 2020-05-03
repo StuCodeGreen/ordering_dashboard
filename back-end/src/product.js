@@ -5,7 +5,7 @@ const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports.submit = (event) => {
+module.exports.submit = (event, context, callback) => {
   const requestBody = JSON.parse(event.body);
   const {
     id,
@@ -54,15 +54,15 @@ module.exports.submit = (event) => {
         body: JSON.stringify({
           message: `Unable to ${
             id ? 'update' : 'submit'
-          } prdouct with name ${product_name}`,
+          } product with name ${product_name}`,
         }),
       });
     });
 };
 
 const submitProduct = (product) => {
-  console.log('Submiting product');
-  const prdouctInfo = {
+  console.log('Submitting product');
+  const productInfo = {
     TableName: process.env.PRODUCT_TABLE,
     Item: product,
   };
