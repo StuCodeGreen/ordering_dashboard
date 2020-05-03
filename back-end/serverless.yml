@@ -28,7 +28,7 @@ resources:
       Properties:
         AttributeDefinitions:
           - AttributeName: 'id'
-          - AttributeType: 'S'
+            AttributeType: 'S'
         KeySchema:
           - AttributeName: 'id'
             KeyType: 'HASH'
@@ -38,3 +38,13 @@ resources:
         StreamSpecification:
           StreamViewType: 'NEW_AND_OLD_IMAGES'
         TableName: ${self:provider.environment.PRODUCT_TABLE}
+
+functions:
+  productSubmission:
+    handler: src/product.submit
+    memorySize: 128
+    description: Submit product information.
+    events:
+      - http:
+          path: products
+          method: post
