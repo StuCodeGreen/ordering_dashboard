@@ -103,7 +103,7 @@ class ProductList extends React.Component {
       });
     } else {
       let filtered = this.state.data.filter((product) =>
-        product.status.includes(status)
+        product.product_status.includes(status)
       );
       this.totalPageCount(filtered);
       this.pagination(filtered, 1);
