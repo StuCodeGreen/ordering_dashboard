@@ -55,3 +55,4 @@ functions:
       - http:
           path: products
           method: get
+          cors: true

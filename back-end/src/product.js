@@ -88,6 +88,29 @@ const productInfo = ({
 	};
 };
 
-module.exports.list = () => {
-
+module.exports.list = (event, context, callback) => {
+	const params = {
+		TableName: process.env.PRODUCT_TABLE,
+		ProjectionExpression: 'id, size, colour, product_satus, customer_initial, product_name, category',
+	}
+	console.log('Scanning Product table.');
+	const onScan = (err, data) => {
+		if (err) {
+			console.log('Scan failed to load data. Error JSON:', JSON.stringify(err, null, 2));
+			callback(err);
+		} else {
+			console.log('Scan succeeded.');
+			return callback(null, {
+				statusCode: 200,
+				headers: {
+					'Access-Control-Allow-Origin': '*',
+					'Access-Control-Allow-Credentials': true,
+				},
+				body: JSON.stringify({
+					products: data.Items,
+				}),
+			});
+		}
+	};
+	dynamoDb.scan(params, onScan);
 };
