@@ -27,8 +27,8 @@ module.exports.submit = (event, context, callback) => {
     typeof product_image !== 'string' ||
     typeof category !== 'string'
   ) {
-    console.error('Validation Failed');
-    callback(new Error('Validation error'));
+    console.error('Validation Failed.');
+    callback(new Error('Validation error.'));
     return;
   }
 
@@ -140,4 +140,23 @@ module.exports.get = (event, context, callback) => {
     });
 };
 
-module.exports.delete = (event, contect, callback) => {};
+module.exports.delete = (event, context, callback) => {
+  const params = {
+    TableName: process.env.PRODUCT_TABLE,
+    id: {
+      Key: event.pathParameters.id,
+    },
+  };
+
+  dynamoDb
+    .delete(params)
+    .promise()
+    .then(() => {
+      callback(null, { statusCode: 200 });
+    })
+    .catch((error) => {
+      console.error(error);
+      callback(new Error("Couldn't delete product."));
+      return;
+    });
+};
