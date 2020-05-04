@@ -63,3 +63,10 @@ functions:
       - http:
           path: products/{id}
           method: get
+  deleteProduct:
+    handler: src/product.delete
+    description: Delete product.
+    events:
+      - http:
+          path: products/{id}
+          method: delete

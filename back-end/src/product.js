@@ -139,3 +139,5 @@ module.exports.get = (event, context, callback) => {
       return;
     });
 };
+
+module.exports.delete = (event, contect, callback) => {};
