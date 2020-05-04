@@ -58,7 +58,7 @@ functions:
           cors: true
   productDetails:
     handler: src/product.get
-    descirption: Get product
+    description: Get product.
     events:
       - http:
           path: products/{id}

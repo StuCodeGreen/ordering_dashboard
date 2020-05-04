@@ -126,7 +126,7 @@ module.exports.get = (event, context, callback) => {
   dynamoDb
     .get(params)
     .promise()
-    .then((results) => {
+    .then((result) => {
       const response = {
         statusCode: 200,
         body: JSON.stringify(result.Item),
