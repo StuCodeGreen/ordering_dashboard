@@ -56,3 +56,10 @@ functions:
           path: products
           method: get
           cors: true
+  productDetails:
+    handler: src/product.get
+    descirption: Get product
+    events:
+      - http:
+          path: products/{id}
+          method: get
