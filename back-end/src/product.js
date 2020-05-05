@@ -143,8 +143,8 @@ module.exports.get = (event, context, callback) => {
 module.exports.delete = (event, context, callback) => {
   const params = {
     TableName: process.env.PRODUCT_TABLE,
-    id: {
-      Key: event.pathParameters.id,
+    Key: {
+      id: event.pathParameters.id,
     },
   };
 
