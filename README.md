@@ -7,4 +7,5 @@
 If you clone this repository, run commands:
 
 npm install
+
 npm start
