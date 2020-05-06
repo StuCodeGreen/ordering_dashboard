@@ -1,41 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductItems from './ProductItems';
 import ProductFilter from './ProductFilter';
 import ProductPagination from './ProductPagination';
 import './ProductList.css';
 
-class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      url:
-        'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products',
-      data: [],
-      products: [],
-      paginated: [],
-      currentPage: 1,
-      productsPerPage: 4,
-      totalPages: 0,
-    };
+function ProductList () {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     url:
+  //       'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products',
+  //     data: [],
+  //     products: [],
+  //     paginated: [],
+  //     currentPage: 1,
+  //     productsPerPage: 4,
+  //     totalPages: 0,
+  //   };
 
-    this.pagination = this.pagination.bind(this);
-    this.tick = this.tick.bind(this);
-    this.status = this.status.bind(this);
-    this.totalPageCount = this.totalPageCount.bind(this);
-    this.selectedPage = this.selectedPage.bind(this);
-  }
+  //   this.pagination = this.pagination.bind(this);
+  //   this.tick = this.tick.bind(this);
+  //   this.status = this.status.bind(this);
+  //   this.totalPageCount = this.totalPageCount.bind(this);
+  //   this.selectedPage = this.selectedPage.bind(this);
+	// }
 
-  async componentDidMount() {
-    const res = await axios.get(this.state.url);
-    this.setState({
-      products: res.data.products,
-      data: res.data.products,
-    });
-    this.totalPageCount(this.state.products);
-    this.pagination(this.state.products, this.state.currentPage);
-    this.tick();
-  }
+	const [url] = useState("https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products");
+	const [data, products, paginated,] = useState([]);
+	const [currentPage] = useState(1);
+	const [productsPerPage] = useState(4);
+	const [totalPages] = useState(0);
+
+
+  // async componentDidMount() {
+  //   const res = await axios.get(this.state.url);
+  //   this.setState({
+  //     products: res.data.products,
+  //     data: res.data.products,
+  //   });
+  //   this.totalPageCount(this.state.products);
+  //   this.pagination(this.state.products, this.state.currentPage);
+  //   this.tick();
+  // }
+
+    useEffect(async () => {	
+			const res = await axios.get(this.state.url);
+			this.setState({
+				products: res.data.products,
+				data: res.data.products,
+			});
+			this.totalPageCount(this.state.products);
+			this.pagination(this.state.products, this.state.currentPage);
+			this.tick();	
+	 }); 
 
   componentWillUnmount() {
     clearInterval(this.tick);
