@@ -1,0 +1,21 @@
+{
+  "name": "ordering_dashboard",
+  "version": "1.0.0",
+  "description": "##### You can preview this project in [CodeSandBox](https://huees.csb.app/)",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd front-end && npm install",
+    "postinstall": "cd back-end && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StuCodeGreen/ordering_dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StuCodeGreen/ordering_dashboard/issues"
+  },
+  "homepage": "https://github.com/StuCodeGreen/ordering_dashboard#readme"
+}
