@@ -60,8 +60,6 @@ function ProductList() {
     //   data: res.data.products,
     // });
 
-    // data(res.data.products);
-
     totalPageCount(products);
     pagination(products, currentPage);
     tick();
