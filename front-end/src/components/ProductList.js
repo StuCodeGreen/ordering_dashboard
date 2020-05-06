@@ -35,7 +35,6 @@ function ProductList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(4);
   const [totalPages, setTotalPages] = useState(0);
-
   // async componentDidMount() {
   //   const res = await axios.get(this.state.url);
   //   this.setState({
@@ -52,7 +51,12 @@ function ProductList() {
       const res = await axios.get(url);
       setProducts(res.data.products);
       setData(res.data.products);
+
+      totalPageCount(products);
+      pagination(products, currentPage);
+      // tick();
     }
+
     fetchData();
 
     // this.setState({
@@ -60,14 +64,11 @@ function ProductList() {
     //   data: res.data.products,
     // });
 
-    totalPageCount(products);
-    pagination(products, currentPage);
-    tick();
-
     return () => {
       clearInterval(tick);
     };
-  }, []);
+    // currentPage, pagination, products, tick, totalPageCount, url
+  }, [url]);
 
   function totalPageCount(products) {
     let pageCount = Math.round(products.length / productsPerPage);
@@ -106,6 +107,9 @@ function ProductList() {
   // }
 
   function tick() {
+    // if (products.length < 1) {
+    //   return false;
+    // }
     setInterval(() => {
       let counter = currentPage;
       counter++;
@@ -172,12 +176,10 @@ function ProductList() {
 
   return (
     <React.Fragment>
-      {' '}
       {paginated ? (
         <div className="dashboard">
-          <ProductFilter status={status} />{' '}
+          <ProductFilter status={status} />
           <div className="products">
-            {' '}
             {paginated.map((product) => (
               <ProductItems
                 key={product.id}
@@ -190,17 +192,17 @@ function ProductList() {
                 initial={product.customer_initial}
                 img={product.product_image}
               />
-            ))}{' '}
-          </div>{' '}
+            ))}
+          </div>
           <ProductPagination
             currentPage={currentPage}
             totalPages={totalPages}
             selectedPage={selectedPage}
-          />{' '}
+          />
         </div>
       ) : (
         <h4> Loading... </h4>
-      )}{' '}
+      )}
     </React.Fragment>
   );
 }
