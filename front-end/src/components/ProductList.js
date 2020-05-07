@@ -81,7 +81,7 @@ function ProductList() {
         counter = 1;
       }
       pageIndication(counter);
-
+      console.log('tick function');
       setCurrentPage(counter);
       pagination(products, currentPage);
     }, 10000);
@@ -183,15 +183,15 @@ function ProductList() {
   useEffect(() => {
     totalPageCount(products);
     pagination(products, currentPage);
-    tick();
+    // tick();
     return () => {
       clearInterval(tick);
     };
-  }, [products, currentPage, pagination, tick, totalPageCount]);
+  }, [products, totalPageCount]);
 
-  // useEffect(() => {
-  //   tick();
-  // });
+  useEffect(() => {
+    // tick();
+  });
   // function totalPageCount(products) {
   //   let pageCount = Math.round(products.length / productsPerPage);
   //   setTotalPages(pageCount);
