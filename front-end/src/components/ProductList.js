@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import ProductItems from './ProductItems';
 import ProductFilter from './ProductFilter';
@@ -39,90 +39,111 @@ function ProductList() {
 
   // REVIEW start
 
-  // const totalPageCount = useCallback(
-  //   (products) => {
-  //     let pageCount = Math.round(products.length / productsPerPage);
-  //     setTotalPages(pageCount);
-  //   },
-  //   [productsPerPage]
-  // );
+  const totalPageCount = useCallback(
+    (products) => {
+      let pageCount = Math.round(products.length / productsPerPage);
+      setTotalPages(pageCount);
+    },
+    [productsPerPage]
+  );
 
-  // const pagination = useCallback(
-  //   (products, currentPage) => {
-  //     const indexOfLastProduct = currentPage * productsPerPage;
-  //     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  //     const currentProducts = products.slice(
-  //       indexOfFirstProduct,
-  //       indexOfLastProduct
-  //     );
+  const pagination = useCallback(
+    (products, currentPage) => {
+      const indexOfLastProduct = currentPage * productsPerPage;
+      const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+      const currentProducts = products.slice(
+        indexOfFirstProduct,
+        indexOfLastProduct
+      );
 
-  //     setPaginated(currentProducts);
-  //   },
-  //   [setPaginated, productsPerPage]
-  // );
+      setPaginated(currentProducts);
+    },
+    [setPaginated, productsPerPage]
+  );
 
-  // const pageIndication = useCallback((event) => {
-  //   let span = document.querySelectorAll('.pages');
-  //   let element = document.getElementById(event);
-  //   for (var i = 0; i < span.length; i++) {
-  //     span[i].classList.remove('active');
-  //   }
-  //   element.classList.add('active');
-  // }, []);
+  const pageIndication = useCallback((event) => {
+    let span = document.querySelectorAll('.pages');
+    let element = document.getElementById(event);
+    for (var i = 0; i < span.length; i++) {
+      span[i].classList.remove('active');
+    }
+    element.classList.add('active');
+  }, []);
 
-  // const tick = useCallback(() => {
-  //   // if (products.length < 1) {
-  //   //   return false;
-  //   // }
-  //   setInterval(() => {
-  //     let counter = currentPage;
-  //     counter++;
-  //     if (currentPage >= totalPages) {
-  //       counter = 1;
-  //     }
-  //     pageIndication(counter);
+  const tick = useCallback(() => {
+    // if (products.length < 1) {
+    //   return false;
+    // }
+    setInterval(() => {
+      let counter = currentPage;
+      counter++;
+      if (currentPage >= totalPages) {
+        counter = 1;
+      }
+      pageIndication(counter);
 
-  //     setCurrentPage(counter);
-  //     pagination(products, currentPage);
-  //   }, 10000);
-  // }, [
-  //   currentPage,
-  //   products,
-  //   pageIndication,
-  //   setCurrentPage,
-  //   pagination,
-  //   totalPages,
-  // ]);
+      setCurrentPage(counter);
+      pagination(products, currentPage);
+    }, 10000);
+  }, [
+    currentPage,
+    products,
+    pageIndication,
+    setCurrentPage,
+    pagination,
+    totalPages,
+  ]);
 
-  // const selectedPage = useCallback(
-  //   (event) => {
-  //     pageIndication(event.target.id);
+  const selectedPage = useCallback(
+    (event) => {
+      pageIndication(event.target.id);
 
-  //     setCurrentPage(Number(event.target.id));
+      setCurrentPage(Number(event.target.id));
 
-  //     pagination(products, Number(event.target.id));
-  //   },
-  //   [pageIndication, setCurrentPage, pagination, products]
-  // );
+      pagination(products, Number(event.target.id));
+    },
+    [pageIndication, setCurrentPage, pagination, products]
+  );
 
-  // const filter = useCallback(
-  //   (status) => {
-  //     if (status === 'all') {
-  //       pagination(data, 1);
-  //       totalPageCount(data);
-  //       setProducts(data);
-  //     } else {
-  //       let filtered = data.filter((product) =>
-  //         product.product_status.includes(status)
-  //       );
-  //       totalPageCount(filtered);
-  //       pagination(filtered, 1);
+  const filter = useCallback(
+    (status) => {
+      if (status === 'all') {
+        pagination(data, 1);
+        totalPageCount(data);
+        setProducts(data);
+      } else {
+        let filtered = data.filter((product) =>
+          product.product_status.includes(status)
+        );
+        totalPageCount(filtered);
+        pagination(filtered, 1);
 
-  //       setProducts(filtered);
-  //     }
-  //   },
-  //   [pagination, data, totalPageCount, setProducts]
-  // );
+        setProducts(filtered);
+      }
+    },
+    [pagination, data, totalPageCount, setProducts]
+  );
+
+  const status = useCallback(
+    (event) => {
+      if (event.target.id === 'all') {
+        filter(event.target.id);
+      }
+      if (event.target.id === 'ready') {
+        filter(event.target.id);
+      }
+      if (event.target.id === 'onTheWay') {
+        filter(event.target.id);
+      }
+      if (event.target.id === 'queue') {
+        filter(event.target.id);
+      }
+      if (event.target.id === 'outOfStock') {
+        filter(event.target.id);
+      }
+    },
+    [filter]
+  );
 
   // REVIEW end
 
@@ -143,13 +164,13 @@ function ProductList() {
       setProducts(res.data.products);
       setData(res.data.products);
 
-      totalPageCount(products);
-      pagination(products, currentPage);
-
       // tick();
     }
 
     fetchData();
+
+    totalPageCount(products);
+    pagination(products, currentPage);
 
     // this.setState({
     //   products: res.data.products,
@@ -160,12 +181,20 @@ function ProductList() {
       // clearInterval(tick);
     };
     // currentPage, pagination, products, tick, totalPageCount, url
-  });
+  }, [
+    url,
+    totalPageCount,
+    pagination,
+    currentPage,
+    products,
+    tick,
+    pageIndication,
+  ]);
 
-  function totalPageCount(products) {
-    let pageCount = Math.round(products.length / productsPerPage);
-    setTotalPages(pageCount);
-  }
+  // function totalPageCount(products) {
+  //   let pageCount = Math.round(products.length / productsPerPage);
+  //   setTotalPages(pageCount);
+  // }
 
   // function totalPageCount(products) {
   //   const { productsPerPage } = this.state;
@@ -175,16 +204,16 @@ function ProductList() {
   //   });
   // }
 
-  function pagination(products, currentPage) {
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(
-      indexOfFirstProduct,
-      indexOfLastProduct
-    );
+  // function pagination(products, currentPage) {
+  //   const indexOfLastProduct = currentPage * productsPerPage;
+  //   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  //   const currentProducts = products.slice(
+  //     indexOfFirstProduct,
+  //     indexOfLastProduct
+  //   );
 
-    setPaginated(currentProducts);
-  }
+  //   setPaginated(currentProducts);
+  // }
   // function pagination(products, currentPage) {
   //   const { productsPerPage } = this.state;
   //   const indexOfLastProduct = currentPage * productsPerPage;
@@ -198,73 +227,73 @@ function ProductList() {
   //   });
   // }
 
-  function tick() {
-    // if (products.length < 1) {
-    //   return false;
-    // }
-    setInterval(() => {
-      let counter = currentPage;
-      counter++;
-      if (currentPage >= totalPages) {
-        counter = 1;
-      }
-      pageIndication(counter);
+  // function tick() {
+  //   // if (products.length < 1) {
+  //   //   return false;
+  //   // }
+  //   setInterval(() => {
+  //     let counter = currentPage;
+  //     counter++;
+  //     if (currentPage >= totalPages) {
+  //       counter = 1;
+  //     }
+  //     pageIndication(counter);
 
-      setCurrentPage(counter);
-      pagination(products, currentPage);
-    }, 10000);
-  }
+  //     setCurrentPage(counter);
+  //     pagination(products, currentPage);
+  //   }, 10000);
+  // }
 
-  function pageIndication(event) {
-    let span = document.querySelectorAll('.pages');
-    let element = document.getElementById(event);
-    for (var i = 0; i < span.length; i++) {
-      span[i].classList.remove('active');
-    }
-    element.classList.add('active');
-  }
+  // function pageIndication(event) {
+  //   let span = document.querySelectorAll('.pages');
+  //   let element = document.getElementById(event);
+  //   for (var i = 0; i < span.length; i++) {
+  //     span[i].classList.remove('active');
+  //   }
+  //   element.classList.add('active');
+  // }
 
-  function selectedPage(event) {
-    pageIndication(event.target.id);
+  // function selectedPage(event) {
+  //   pageIndication(event.target.id);
 
-    setCurrentPage(Number(event.target.id));
+  //   setCurrentPage(Number(event.target.id));
 
-    pagination(products, Number(event.target.id));
-  }
+  //   pagination(products, Number(event.target.id));
+  // }
 
-  function filter(status) {
-    if (status === 'all') {
-      pagination(data, 1);
-      totalPageCount(data);
-      setProducts(data);
-    } else {
-      let filtered = data.filter((product) =>
-        product.product_status.includes(status)
-      );
-      totalPageCount(filtered);
-      pagination(filtered, 1);
+  // function filter(status) {
+  //   if (status === 'all') {
+  //     pagination(data, 1);
+  //     totalPageCount(data);
+  //     setProducts(data);
+  //   } else {
+  //     let filtered = data.filter((product) =>
+  //       product.product_status.includes(status)
+  //     );
+  //     totalPageCount(filtered);
+  //     pagination(filtered, 1);
 
-      setProducts(filtered);
-    }
-  }
+  //     setProducts(filtered);
+  //   }
+  // }
 
-  function status(event) {
-    if (event.target.id === 'all') {
-      filter(event.target.id);
-    }
-    if (event.target.id === 'ready') {
-      filter(event.target.id);
-    }
-    if (event.target.id === 'onTheWay') {
-      filter(event.target.id);
-    }
-    if (event.target.id === 'queue') {
-      filter(event.target.id);
-    }
-    if (event.target.id === 'outOfStock') {
-      filter(event.target.id);
-    }
-  }
+  // function status(event) {
+  //   if (event.target.id === 'all') {
+  //     filter(event.target.id);
+  //   }
+  //   if (event.target.id === 'ready') {
+  //     filter(event.target.id);
+  //   }
+  //   if (event.target.id === 'onTheWay') {
+  //     filter(event.target.id);
+  //   }
+  //   if (event.target.id === 'queue') {
+  //     filter(event.target.id);
+  //   }
+  //   if (event.target.id === 'outOfStock') {
+  //     filter(event.target.id);
+  //   }
+  // }
 
   return (
     <React.Fragment>
