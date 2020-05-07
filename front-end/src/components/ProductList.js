@@ -169,9 +169,6 @@ function ProductList() {
 
     fetchData();
 
-    totalPageCount(products);
-    pagination(products, currentPage);
-
     // this.setState({
     //   products: res.data.products,
     //   data: res.data.products,
@@ -181,16 +178,20 @@ function ProductList() {
       // clearInterval(tick);
     };
     // currentPage, pagination, products, tick, totalPageCount, url
-  }, [
-    url,
-    totalPageCount,
-    pagination,
-    currentPage,
-    products,
-    tick,
-    pageIndication,
-  ]);
+  }, [url]);
 
+  useEffect(() => {
+    totalPageCount(products);
+    pagination(products, currentPage);
+    tick();
+    return () => {
+      clearInterval(tick);
+    };
+  }, [products, currentPage, pagination, tick, totalPageCount]);
+
+  // useEffect(() => {
+  //   tick();
+  // });
   // function totalPageCount(products) {
   //   let pageCount = Math.round(products.length / productsPerPage);
   //   setTotalPages(pageCount);
