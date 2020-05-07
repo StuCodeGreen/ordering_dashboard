@@ -27,7 +27,8 @@ function ProductList() {
   // }
 
   const [url] = useState(
-    'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
+    // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
+    'db/db.json'
   );
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -35,16 +36,8 @@ function ProductList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(4);
   const [totalPages, setTotalPages] = useState(0);
-  // async componentDidMount() {
-  //   const res = await axios.get(this.state.url);
-  //   this.setState({
-  //     products: res.data.products,
-  //     data: res.data.products,
-  //   });
-  //   this.totalPageCount(this.state.products);
-  //   this.pagination(this.state.products, this.state.currentPage);
-  //   this.tick();
-  // }
+
+  // REVIEW start
 
   // const totalPageCount = useCallback(
   //   (products) => {
@@ -131,14 +124,28 @@ function ProductList() {
   //   [pagination, data, totalPageCount, setProducts]
   // );
 
+  // REVIEW end
+
+  // async componentDidMount() {
+  //   const res = await axios.get(this.state.url);
+  //   this.setState({
+  //     products: res.data.products,
+  //     data: res.data.products,
+  //   });
+  //   this.totalPageCount(this.state.products);
+  //   this.pagination(this.state.products, this.state.currentPage);
+  //   this.tick();
+  // }
+
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(url);
       setProducts(res.data.products);
       setData(res.data.products);
 
-      // totalPageCount(products);
-      // pagination(products, currentPage);
+      totalPageCount(products);
+      pagination(products, currentPage);
+
       // tick();
     }
 
@@ -148,7 +155,7 @@ function ProductList() {
     //   products: res.data.products,
     //   data: res.data.products,
     // });
-
+    console.log(currentPage);
     return () => {
       // clearInterval(tick);
     };
