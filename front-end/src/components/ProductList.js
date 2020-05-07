@@ -27,8 +27,7 @@ function ProductList() {
   // }
 
   const [url] = useState(
-    // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
-    'db/db.json'
+    'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
   );
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -47,19 +46,103 @@ function ProductList() {
   //   this.tick();
   // }
 
+  // const totalPageCount = useCallback(
+  //   (products) => {
+  //     let pageCount = Math.round(products.length / productsPerPage);
+  //     setTotalPages(pageCount);
+  //   },
+  //   [productsPerPage]
+  // );
+
+  // const pagination = useCallback(
+  //   (products, currentPage) => {
+  //     const indexOfLastProduct = currentPage * productsPerPage;
+  //     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  //     const currentProducts = products.slice(
+  //       indexOfFirstProduct,
+  //       indexOfLastProduct
+  //     );
+
+  //     setPaginated(currentProducts);
+  //   },
+  //   [setPaginated, productsPerPage]
+  // );
+
+  // const pageIndication = useCallback((event) => {
+  //   let span = document.querySelectorAll('.pages');
+  //   let element = document.getElementById(event);
+  //   for (var i = 0; i < span.length; i++) {
+  //     span[i].classList.remove('active');
+  //   }
+  //   element.classList.add('active');
+  // }, []);
+
+  // const tick = useCallback(() => {
+  //   // if (products.length < 1) {
+  //   //   return false;
+  //   // }
+  //   setInterval(() => {
+  //     let counter = currentPage;
+  //     counter++;
+  //     if (currentPage >= totalPages) {
+  //       counter = 1;
+  //     }
+  //     pageIndication(counter);
+
+  //     setCurrentPage(counter);
+  //     pagination(products, currentPage);
+  //   }, 10000);
+  // }, [
+  //   currentPage,
+  //   products,
+  //   pageIndication,
+  //   setCurrentPage,
+  //   pagination,
+  //   totalPages,
+  // ]);
+
+  // const selectedPage = useCallback(
+  //   (event) => {
+  //     pageIndication(event.target.id);
+
+  //     setCurrentPage(Number(event.target.id));
+
+  //     pagination(products, Number(event.target.id));
+  //   },
+  //   [pageIndication, setCurrentPage, pagination, products]
+  // );
+
+  // const filter = useCallback(
+  //   (status) => {
+  //     if (status === 'all') {
+  //       pagination(data, 1);
+  //       totalPageCount(data);
+  //       setProducts(data);
+  //     } else {
+  //       let filtered = data.filter((product) =>
+  //         product.product_status.includes(status)
+  //       );
+  //       totalPageCount(filtered);
+  //       pagination(filtered, 1);
+
+  //       setProducts(filtered);
+  //     }
+  //   },
+  //   [pagination, data, totalPageCount, setProducts]
+  // );
+
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(url);
       setProducts(res.data.products);
       setData(res.data.products);
 
+      // totalPageCount(products);
+      // pagination(products, currentPage);
       // tick();
     }
 
     fetchData();
-
-    // totalPageCount(products);
-    // pagination(products, currentPage);
 
     // this.setState({
     //   products: res.data.products,
@@ -70,7 +153,7 @@ function ProductList() {
       // clearInterval(tick);
     };
     // currentPage, pagination, products, tick, totalPageCount, url
-  }, []);
+  });
 
   function totalPageCount(products) {
     let pageCount = Math.round(products.length / productsPerPage);
