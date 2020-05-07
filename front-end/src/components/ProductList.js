@@ -27,7 +27,8 @@ function ProductList() {
   // }
 
   const [url] = useState(
-    'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
+    // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
+    'db/db.json'
   );
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -52,12 +53,13 @@ function ProductList() {
       setProducts(res.data.products);
       setData(res.data.products);
 
-      totalPageCount(products);
-      pagination(products, currentPage);
       // tick();
     }
 
     fetchData();
+
+    // totalPageCount(products);
+    // pagination(products, currentPage);
 
     // this.setState({
     //   products: res.data.products,
@@ -65,10 +67,10 @@ function ProductList() {
     // });
 
     return () => {
-      clearInterval(tick);
+      // clearInterval(tick);
     };
     // currentPage, pagination, products, tick, totalPageCount, url
-  }, [url]);
+  }, []);
 
   function totalPageCount(products) {
     let pageCount = Math.round(products.length / productsPerPage);
