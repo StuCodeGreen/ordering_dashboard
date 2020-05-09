@@ -9,7 +9,7 @@ export default class ProductPagination extends React.Component {
       pages.push(i);
     }
 
-    const renderPagesIndication = pages.map(page => (
+    const renderPagesIndication = pages.map((page) => (
       <span
         onClick={selectedPage}
         key={page}

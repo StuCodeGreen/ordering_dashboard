@@ -7,8 +7,8 @@ import './ProductList.css';
 
 function ProductList() {
   const [url] = useState(
-    // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
-    'db/db.json'
+    'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
+    // 'db/db.json'
   );
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -62,19 +62,20 @@ function ProductList() {
   const filter = useCallback(
     (status) => {
       if (status === 'all') {
+        setProducts(data);
         pagination(data, 1);
         totalPageCount(data);
-        setProducts(data);
       } else {
         let filtered = data.filter((product) =>
           product.product_status.includes(status)
         );
+        setProducts(filtered);
+        setCurrentPage(1);
         totalPageCount(filtered);
         pagination(filtered, 1);
-        setProducts(filtered);
       }
     },
-    [pagination, data, totalPageCount, setProducts]
+    [pagination, data, totalPageCount, setProducts, setCurrentPage]
   );
 
   const status = useCallback(
@@ -94,8 +95,9 @@ function ProductList() {
       if (event.target.id === 'outOfStock') {
         filter(event.target.id);
       }
+      pageIndication(1);
     },
-    [filter]
+    [filter, pageIndication]
   );
 
   const tick = useCallback(() => {
@@ -130,7 +132,8 @@ function ProductList() {
     }
 
     fetchData();
-  }, [url, pageIndication]);
+    console.log('fetch');
+  }, [url]);
 
   useEffect(() => {
     totalPageCount(products);
@@ -140,7 +143,7 @@ function ProductList() {
     return () => {
       clearTimeout(interval);
     };
-  }, [totalPageCount, pagination, products, currentPage, tick]);
+  }, [totalPageCount, pagination, products, tick, currentPage]);
 
   return (
     <React.Fragment>
