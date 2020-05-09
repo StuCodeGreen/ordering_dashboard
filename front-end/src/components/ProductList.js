@@ -18,11 +18,11 @@ function ProductList() {
   const [totalPages, setTotalPages] = useState(0);
 
   const totalPageCount = useCallback(
-    (products) => {
-      let pageCount = Math.round(products.length / productsPerPage);
+    (prod) => {
+      let pageCount = Math.round(prod.length / productsPerPage);
       setTotalPages(pageCount);
     },
-    [productsPerPage]
+    [setTotalPages, productsPerPage]
   );
 
   const pagination = useCallback(
@@ -39,35 +39,14 @@ function ProductList() {
     [setPaginated, productsPerPage]
   );
 
-  const pageIndication = useCallback((event) => {
+  const pageIndication = useCallback((page) => {
     let span = document.querySelectorAll('.pages');
-    let element = document.getElementById(event);
+    let element = document.getElementById(page);
     for (var i = 0; i < span.length; i++) {
       span[i].classList.remove('active');
     }
     element.classList.add('active');
   }, []);
-
-  const tick = useCallback(() => {
-    setInterval(() => {
-      let counter = currentPage;
-      counter++;
-      if (currentPage >= totalPages) {
-        counter = 1;
-      }
-      pageIndication(counter);
-      console.log('tick function');
-      setCurrentPage(counter);
-      pagination(products, currentPage);
-    }, 10000);
-  }, [
-    currentPage,
-    products,
-    pageIndication,
-    setCurrentPage,
-    pagination,
-    totalPages,
-  ]);
 
   const selectedPage = useCallback(
     (event) => {
@@ -92,7 +71,6 @@ function ProductList() {
         );
         totalPageCount(filtered);
         pagination(filtered, 1);
-
         setProducts(filtered);
       }
     },
@@ -120,20 +98,49 @@ function ProductList() {
     [filter]
   );
 
+  const tick = useCallback(() => {
+    const interval = setInterval(() => {
+      let counter = currentPage;
+      counter++;
+      if (currentPage >= totalPages) {
+        counter = 1;
+      }
+      pageIndication(counter);
+      setCurrentPage(counter);
+      pagination(products, counter);
+      console.log('tick');
+    }, 10000);
+
+    return interval;
+  }, [
+    products,
+    currentPage,
+    pageIndication,
+    pagination,
+    totalPages,
+    setCurrentPage,
+  ]);
+
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(url);
       setProducts(res.data.products);
       setData(res.data.products);
+      pageIndication(currentPage);
     }
 
     fetchData();
-  }, []);
+  }, [url, pageIndication]);
 
   useEffect(() => {
     totalPageCount(products);
     pagination(products, currentPage);
-  }, [products]);
+    const interval = tick();
+
+    return () => {
+      clearTimeout(interval);
+    };
+  }, [totalPageCount, pagination, products, currentPage, tick]);
 
   return (
     <React.Fragment>
