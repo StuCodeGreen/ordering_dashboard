@@ -110,7 +110,6 @@ function ProductList() {
       pageIndication(counter);
       setCurrentPage(counter);
       pagination(products, counter);
-      console.log('tick');
     }, 10000);
 
     return interval;
@@ -132,7 +131,6 @@ function ProductList() {
     }
 
     fetchData();
-    console.log('fetch');
   }, [url]);
 
   useEffect(() => {
