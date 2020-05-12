@@ -21,90 +21,75 @@ function App() {
     totalPages: 0,
   });
 
-  const totalPageCount = useCallback(
-    (products) => {
-      let pageCount = Math.round(products.length / state.productsPerPage);
-      setState({ totalPages: pageCount });
-    },
-    [state, setState]
-  );
+  const totalPageCount = (products) => {
+    setState({
+      totalPages: Math.round(products.length / state.productsPerPage),
+    });
+  };
 
-  const pagination = useCallback(
-    (products, currentPage) => {
-      const indexOfLastProduct = currentPage * state.productsPerPage;
-      const indexOfFirstProduct = indexOfLastProduct - state.productsPerPage;
-      const currentProducts = products.slice(
-        indexOfFirstProduct,
-        indexOfLastProduct
-      );
+  const pagination = (products, currentPage) => {
+    const indexOfLastProduct = currentPage * state.productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - state.productsPerPage;
+    const currentProducts = products.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+    setState({ paginated: currentProducts });
+  };
 
-      setState({ paginated: currentProducts });
-    },
-    [setState, state]
-  );
-
-  const pageIndication = useCallback((event) => {
+  const pageIndication = (event) => {
     let span = document.querySelectorAll('.pages');
     let element = document.getElementById(event);
     for (var i = 0; i < span.length; i++) {
       span[i].classList.remove('active');
     }
     element.classList.add('active');
-  }, []);
+  };
 
-  const selectedPage = useCallback(
-    (event) => {
-      pageIndication(event.target.id);
+  const selectedPage = (event) => {
+    pageIndication(event.target.id);
 
-      setState({ currentPage: Number(event.target.id) });
+    setState({ currentPage: Number(event.target.id) });
 
-      pagination(state.products, Number(event.target.id));
-    },
-    [setState, state]
-  );
+    pagination(state.products, Number(event.target.id));
+  };
 
-  const filter = useCallback(
-    (status) => {
-      if (status === 'all') {
-        setState({ products: state.data });
-        pagination(state.data, 1);
-        totalPageCount(state.data);
-      } else {
-        let filtered = state.data.filter((product) =>
-          product.product_status.includes(status)
-        );
-        setState({ products: filtered });
-        setState({ currentPage: 1 });
-        totalPageCount(filtered);
-        pagination(filtered, 1);
-      }
-    },
-    [setState, state]
-  );
+  const filter = (status) => {
+    if (status === 'all') {
+      setState({ products: state.data });
+      pagination(state.data, 1);
+      totalPageCount(state.data);
+    } else {
+      let filtered = state.data.filter((product) =>
+        product.product_status.includes(status)
+      );
+      setState({ products: filtered });
+      setState({ currentPage: 1 });
+      totalPageCount(filtered);
+      pagination(filtered, 1);
+    }
+  };
 
-  const status = useCallback(
-    (event) => {
-      if (event.target.id === 'all') {
-        filter(event.target.id);
-      }
-      if (event.target.id === 'ready') {
-        filter(event.target.id);
-      }
-      if (event.target.id === 'onTheWay') {
-        filter(event.target.id);
-      }
-      if (event.target.id === 'queue') {
-        filter(event.target.id);
-      }
-      if (event.target.id === 'outOfStock') {
-        filter(event.target.id);
-      }
-      pageIndication(1);
-    },
-    [filter, pageIndication]
-  );
+  const status = (event) => {
+    if (event.target.id === 'all') {
+      filter(event.target.id);
+    }
+    if (event.target.id === 'ready') {
+      filter(event.target.id);
+    }
+    if (event.target.id === 'onTheWay') {
+      filter(event.target.id);
+    }
+    if (event.target.id === 'queue') {
+      filter(event.target.id);
+    }
+    if (event.target.id === 'outOfStock') {
+      filter(event.target.id);
+    }
+    pageIndication(1);
+  };
 
-  const tick = useCallback(() => {
+  const tick = () => {
     const interval = setInterval(() => {
       let counter = state.currentPage;
       counter++;
@@ -117,7 +102,8 @@ function App() {
       pagination(state.products, state.currentPage);
     }, 10000);
     return interval;
-  }, [state, setState]);
+  };
+
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(state.url);
