@@ -123,6 +123,7 @@ function App() {
       setState({ currentPage: counter });
       pagination(state.products, state.currentPage);
     }, 10000);
+    return interval;
   }, [state, setState]);
   useEffect(() => {
     async function fetchData() {
