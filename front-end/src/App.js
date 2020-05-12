@@ -21,13 +21,6 @@ function App() {
     totalPages: 0,
   });
 
-  // const [data, setData] = useState([]);
-  // const [products, setProducts] = useState([]);
-  // const [paginated, setPaginated] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [productsPerPage] = useState(4);
-  // const [totalPages, setTotalPages] = useState(0);
-
   const totalPageCount = useCallback(
     (products) => {
       let pageCount = Math.round(products.length / state.productsPerPage);
@@ -67,7 +60,7 @@ function App() {
 
       pagination(state.products, Number(event.target.id));
     },
-    [setState]
+    [setState, state]
   );
 
   const filter = useCallback(
@@ -144,13 +137,7 @@ function App() {
     return () => {
       clearTimeout(interval);
     };
-  }, [
-    // totalPageCount,
-    // pagination,
-    state.products,
-    // tick,
-    state.currentPage,
-  ]);
+  }, [state.products, state.currentPage]);
 
   return (
     <React.Fragment>
