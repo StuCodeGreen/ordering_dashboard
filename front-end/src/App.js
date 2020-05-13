@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useReducer } from 'react';
-import axios from 'axios';
+import React, { useEffect, useReducer } from 'react';
 import ProductItems from './components/ProductItems';
 import ProductFilter from './components/ProductFilter';
 import ProductPagination from './components/ProductPagination';
@@ -7,26 +6,12 @@ import './components/ProductList.css';
 import API from './API';
 
 function App() {
-  useEffect(() => {
-    // async function fetchData() {
-    //   const res = await axios.get(state.url);
-    //   setState({ products: res.data.products });
-    //   setState({ data: res.data.products });
-    //   pageIndication(state.currentPage);
-    // }
-
-    function fetchData() {
-      API.get('products').then(({ data }) => {
-        setState({ products: data.products });
-      });
-    }
-    fetchData();
-  }, []);
-
-  const [url] = useState(
-    // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
-    'db/db.json'
-  );
+  function fetchData() {
+    API.get('products').then(({ data }) => {
+      setState({ products: data.products });
+      setState({ data: data.products });
+    });
+  }
 
   const [state, setState] = useReducer((prev, next) => ({ ...prev, ...next }), {
     url: ['db/db.json'],
@@ -65,9 +50,7 @@ function App() {
 
   const selectedPage = (event) => {
     pageIndication(event.target.id);
-
     setState({ currentPage: Number(event.target.id) });
-
     pagination(state.products, Number(event.target.id));
   };
 
@@ -122,6 +105,10 @@ function App() {
   };
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     totalPageCount(state.products);
     pagination(state.products, state.currentPage);
     const interval = tick();
@@ -131,36 +118,32 @@ function App() {
     };
   }, [state.products, state.currentPage]);
 
-  return (
-    <React.Fragment>
-      {state.paginated ? (
-        <div className="dashboard">
-          <ProductFilter status={status} />
-          <div className="products">
-            {state.paginated.map((product) => (
-              <ProductItems
-                key={product.id}
-                id={product.id}
-                name={product.product_name}
-                category={product.category}
-                size={product.size}
-                colour={product.colour}
-                status={product.product_status}
-                initial={product.customer_initial}
-                img={product.product_image}
-              />
-            ))}
-          </div>
-          <ProductPagination
-            currentPage={state.currentPage}
-            totalPages={state.totalPages}
-            selectedPage={selectedPage}
+  return state.data ? (
+    <div className="dashboard">
+      <ProductFilter status={status} />
+      <div className="products">
+        {state.paginated.map((product) => (
+          <ProductItems
+            key={product.id}
+            id={product.id}
+            name={product.product_name}
+            category={product.category}
+            size={product.size}
+            colour={product.colour}
+            status={product.product_status}
+            initial={product.customer_initial}
+            img={product.product_image}
           />
-        </div>
-      ) : (
-        <h4> Loading... </h4>
-      )}
-    </React.Fragment>
+        ))}
+      </div>
+      <ProductPagination
+        currentPage={state.currentPage}
+        totalPages={state.totalPages}
+        selectedPage={selectedPage}
+      />
+    </div>
+  ) : (
+    <h4> Loading... </h4>
   );
 }
 
