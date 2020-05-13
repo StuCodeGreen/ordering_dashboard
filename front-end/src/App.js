@@ -4,8 +4,25 @@ import ProductItems from './components/ProductItems';
 import ProductFilter from './components/ProductFilter';
 import ProductPagination from './components/ProductPagination';
 import './components/ProductList.css';
+import API from './API';
 
 function App() {
+  useEffect(() => {
+    // async function fetchData() {
+    //   const res = await axios.get(state.url);
+    //   setState({ products: res.data.products });
+    //   setState({ data: res.data.products });
+    //   pageIndication(state.currentPage);
+    // }
+
+    function fetchData() {
+      API.get('products').then(({ data }) => {
+        setState({ products: data.products });
+      });
+    }
+    fetchData();
+  }, []);
+
   const [url] = useState(
     // 'https://6hgqu0b2te.execute-api.eu-west-2.amazonaws.com/dev/products'
     'db/db.json'
@@ -103,17 +120,6 @@ function App() {
     }, 10000);
     return interval;
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await axios.get(state.url);
-      setState({ products: res.data.products });
-      setState({ data: res.data.products });
-      pageIndication(state.currentPage);
-    }
-    console.log('useEffect 1');
-    fetchData();
-  }, [state.url]);
 
   useEffect(() => {
     totalPageCount(state.products);
