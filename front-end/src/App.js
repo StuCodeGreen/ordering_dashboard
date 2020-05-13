@@ -4,6 +4,7 @@ import ProductFilter from './components/ProductFilter';
 import ProductPagination from './components/ProductPagination';
 import './components/ProductList.css';
 import API from './API';
+import pageIndication from './functions';
 
 function App() {
   function fetchData() {
@@ -39,14 +40,14 @@ function App() {
     setState({ paginated: currentProducts });
   };
 
-  const pageIndication = (event) => {
-    let span = document.querySelectorAll('.pages');
-    let element = document.getElementById(event);
-    for (var i = 0; i < span.length; i++) {
-      span[i].classList.remove('active');
-    }
-    element.classList.add('active');
-  };
+  // const pageIndication = (event) => {
+  //   let span = document.querySelectorAll('.pages');
+  //   let element = document.getElementById(event);
+  //   for (var i = 0; i < span.length; i++) {
+  //     span[i].classList.remove('active');
+  //   }
+  //   element.classList.add('active');
+  // };
 
   const selectedPage = (event) => {
     pageIndication(event.target.id);
