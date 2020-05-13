@@ -104,6 +104,13 @@ function App() {
     return interval;
   };
 
+  function isLoaded(data) {
+    if (data.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   useEffect(() => {
     fetchData();
   }, []);
@@ -118,7 +125,7 @@ function App() {
     };
   }, [state.products, state.currentPage]);
 
-  return state.data ? (
+  return isLoaded(state.data) ? (
     <div className="dashboard">
       <ProductFilter status={status} />
       <div className="products">
@@ -143,7 +150,7 @@ function App() {
       />
     </div>
   ) : (
-    <h4> Loading... </h4>
+    <h1 style={{ color: '#fff', textAlign: 'center' }}> Loading... </h1>
   );
 }
 
