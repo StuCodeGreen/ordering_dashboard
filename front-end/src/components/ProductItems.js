@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductItems.css';
 
 export default function ProductItems(props) {
-  const { id, name, category, size, colour, status, initial, img } = props;
+  const { name, category, size, colour, status, initial, img } = props;
 
   return (
     <div className="productItem">
